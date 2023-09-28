@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     LocationRequest locationRequest;
 
+    RoomDatabase runDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,19 @@ public class MainActivity extends AppCompatActivity {
         sw_gps = findViewById(R.id.sw_gps);
         sw_locationupdates = findViewById(R.id.sw_locationsupdates);
 
-        //set properties of locationRequest
+	RoomDatabase.Callback myCallBack = new RoomDatabase.CallBack() {
+		@Override
+		public void onCreate(@NonNull SupportSQLiteDatabase db) {
+			super.onCreate(db);
+		}
+
+		@Override
+		public void onOpen(@NonNull SupportSQLiteDatabase db) {
+			super.onOpen (db);
+		}
+	};
+
+	runDB = Room.databaseBuilder(getApplicationContext(0, RunDatabase.class, name:"RunDB").addCallback(myCallBack).build();
 
 
         locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, DEFAULT_UPDATE_INTERVAL * 1000).build();
@@ -156,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
                 tv_speed.setText("Unavailable");
             }
         }
+
+
 
     }
 }
