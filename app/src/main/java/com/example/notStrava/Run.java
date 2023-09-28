@@ -18,8 +18,14 @@ public class Run {
 	@ColumnInfo(name = "avg_speed")
 	double avg_speed;
 
-	@ColumnInfo(name = "date")
-	int date;
+	@ColumnInfo(name = "day")
+	int day;
+
+	@ColumnInfo(name = "month")
+	int month;
+
+	@ColumnInfo(name = "year")
+	int year;
 
 	@Ignore 
 	public Run(){

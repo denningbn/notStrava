@@ -17,5 +17,6 @@ public interface RunDAO {
 	@Query("select * from run where run_id==run_id")
 	public Run getRun(int run_id);
 
-	
+	@Query("select * from run where run_year==run_year AND run_year==run_year")
+	public Run getRunsInMonth(int run_month, int run_year);	
 }
