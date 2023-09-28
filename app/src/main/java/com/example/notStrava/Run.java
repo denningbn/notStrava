@@ -18,6 +18,9 @@ public class Run {
 	@ColumnInfo(name = "avg_speed")
 	double avg_speed;
 
+	@ColumnInfo(name = "date")
+	int date;
+
 	@Ignore 
 	public Run(){
 	
@@ -35,6 +38,10 @@ public class Run {
 	
 	public getAvgSpeed(){
 		 return this.avg_speed;
+	}
+	
+	public getDate(){
+		 return this.date;
 	}
 }
 
