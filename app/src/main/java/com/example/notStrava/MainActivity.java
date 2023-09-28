@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     LocationRequest locationRequest;
 
+    LocationCallback locationCallback;
+
     RoomDatabase runDB;
 
     @Override
@@ -112,6 +114,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         updateGPS();
+
+	locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location: locationresult.getLocations()) {
+                
+                }
+            };
+        }
     }
 
     @Override
@@ -174,4 +188,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onResume() {
+	super.onResume();
+	if (requestingLocationUpdates) {
+		startLocationUpdates();
+        }
+    }
+
+    private void startLocationUpdates() {
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+    }
+
+    
 }
+
