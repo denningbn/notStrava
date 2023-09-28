@@ -123,6 +123,12 @@ public class MainActivity extends AppCompatActivity {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    updateUIValues(location);
+                }
+            });
         }
         else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -131,23 +137,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateUIValues(Location location){
+    private void updateUIValues(Location location) {
 
-        //tv_lat.setText(String.valueOf(location.getLatitude()));
-        //tv_lon.setText(String.valueOf(location.getLatitude()));
+        if (location != null)
+        {
+            tv_lat.setText(String.valueOf(location.getLatitude()));
+            tv_lon.setText(String.valueOf(location.getLatitude()));
 
-        tv_lat.setText(location.toString());
-        /*if (location.hasAltitude()){
-            tv_altitude.setText("Has altitude");
+            tv_lat.setText(location.toString());
+            if (location.hasAltitude()) {
+                tv_altitude.setText("Has altitude");
+            } else {
+                tv_altitude.setText("Unavailable");
+            }
+            if (location.hasSpeed()) {
+                tv_speed.setText("Has altitude");
+            } else {
+                tv_speed.setText("Unavailable");
+            }
         }
-        else{
-            tv_altitude.setText("Unavailable");
-        }
-        if (location.hasSpeed()){
-            tv_speed.setText("Has altitude");
-        }
-        else{
-            tv_speed.setText("Unavailable");
-        }*/
+
     }
 }
